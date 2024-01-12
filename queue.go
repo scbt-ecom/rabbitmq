@@ -2,7 +2,7 @@ package rabbitmq
 
 import (
 	amqp "github.com/rabbitmq/amqp091-go"
-	"github.com/sirupsen/logrus"
+	"github.com/skbt-ecom/logging"
 )
 
 type Queue struct {
@@ -12,7 +12,7 @@ type Queue struct {
 	XMessageTTL         int //milliseconds
 }
 
-func InitQueue(conn *amqp.Connection, log *logrus.Entry, queue Queue) error {
+func InitQueue(conn *amqp.Connection, log *logging.Logger, queue Queue) error {
 	ch, err := conn.Channel()
 	if err != nil {
 		log.WithField("error", err).Error("failed to open channel")
