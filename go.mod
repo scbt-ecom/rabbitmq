@@ -1,4 +1,4 @@
-module rabbitmq
+module github.com/skbt-ecom/rabbitmq
 
 go 1.20
 
