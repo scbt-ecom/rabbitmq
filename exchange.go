@@ -2,7 +2,6 @@ package rabbitmq
 
 import (
 	"github.com/rabbitmq/amqp091-go"
-	"github.com/skbt-ecom/logging"
 )
 
 type Exchange struct {
@@ -10,7 +9,7 @@ type Exchange struct {
 	Type string
 }
 
-func InitExchange(conn *amqp091.Connection, log *logging.Logger, exchange Exchange) error {
+func InitExchange(conn *amqp091.Connection, exchange Exchange) error {
 	ch, err := conn.Channel()
 	if err != nil {
 		return err
