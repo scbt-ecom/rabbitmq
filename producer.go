@@ -18,6 +18,7 @@ func Produce(conn *amqp091.Connection, message any, exchange, key string) error 
 	if err != nil {
 		return err
 	}
+	defer ch.Close()
 
 	body, err := json.Marshal(message)
 	if err != nil {

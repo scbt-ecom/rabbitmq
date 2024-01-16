@@ -14,7 +14,6 @@ func InitExchange(conn *amqp091.Connection, exchange Exchange) error {
 	if err != nil {
 		return err
 	}
-
 	defer ch.Close()
 
 	err = ch.ExchangeDeclare(exchange.Name, exchange.Type, true, false, false, false, nil)
