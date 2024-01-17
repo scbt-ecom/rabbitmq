@@ -3,12 +3,12 @@ package rabbitmq
 import (
 	"encoding/json"
 	"errors"
-	"github.com/rabbitmq/amqp091-go"
+	amqp "github.com/rabbitmq/amqp091-go"
 	"reflect"
 )
 
 // Produce message should be structure pointer
-func Produce(conn *amqp091.Connection, message any, exchange, key string) error {
+func Produce(conn *amqp.Connection, message any, headers amqp.Table, exchange, key string) error {
 	v := reflect.ValueOf(message)
 	if v.Kind() != reflect.Ptr || v.Elem().Kind() != reflect.Struct {
 		return errors.New("message not a structure pointer")
@@ -25,9 +25,10 @@ func Produce(conn *amqp091.Connection, message any, exchange, key string) error 
 		return err
 	}
 
-	err = ch.Publish(exchange, key, false, false, amqp091.Publishing{
+	err = ch.Publish(exchange, key, false, false, amqp.Publishing{
 		ContentType: "application/json",
 		Body:        body,
+		Headers:     headers,
 	})
 	if err != nil {
 		return err

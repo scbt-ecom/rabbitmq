@@ -17,6 +17,7 @@ conn, err := rabbitmq.CreateConnection(<rabbitMqUrl>)
 ````
 exampleQueue := rabbitmq.Queue{
 		Name:                cfg.RabbitMqQueueName,
+		Key:                 cfg.RabbitMqKey,
 		Exchange:            cfg.RabbitMqExchange,
 		XDeadLetterExchange: "retry",
 		XMessageTTL:         1000 * 60 * 60,
@@ -42,6 +43,6 @@ msgs, err := rabbitmq.Consume(conn, <queueName>, <consumerName>)
 
 ### Example of queue producing
 ````
-err := rabbitmq.Produce(conn, <messageStructure>, <exchangeName>, <queueName>)
-//messageStructure should be a structure pointer
+err := rabbitmq.Produce(conn, <messageStructure>, <exchangeName>, <queueKey>)
+// messageStructure should be a structure pointer
 ````
