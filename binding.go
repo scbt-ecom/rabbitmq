@@ -11,7 +11,7 @@ func initBinding(conn *amqp.Connection, queue Queue) error {
 	}
 	defer ch.Close()
 
-	err = ch.QueueBind(queue.Name, queue.Name, queue.Exchange, false, nil)
+	err = ch.QueueBind(queue.Name, queue.Key, queue.Exchange, false, nil)
 	if err != nil {
 		return err
 	}

@@ -6,6 +6,7 @@ import (
 
 type Queue struct {
 	Name                string
+	Key                 string
 	Exchange            string
 	XDeadLetterExchange string
 	XMessageTTL         int //milliseconds
