@@ -16,11 +16,11 @@ conn, err := rabbitmq.CreateConnection(<rabbitMqUrl>)
 
 ````
 exampleQueue := rabbitmq.Queue{
-		Name:                cfg.RabbitMqQueueName,
-		Key:                 cfg.RabbitMqKey,
-		Exchange:            cfg.RabbitMqExchange,
-		XDeadLetterExchange: "retry",
-		XMessageTTL:         1000 * 60 * 60,
+		Name:                cfg.RabbitMqQueueName, // required
+		Key:                 cfg.RabbitMqKey, // required
+		Exchange:            cfg.RabbitMqExchange, // required
+		XDeadLetterExchange: "retry", // optionally
+		XMessageTTL:         1000 * 60 * 60, // optionally
 	}
 
 err := rabbitmq.InitQueue(conn, exampleQueue)
@@ -43,6 +43,6 @@ msgs, err := rabbitmq.Consume(conn, <queueName>, <consumerName>)
 
 ### Example of queue producing
 ````
-err := rabbitmq.Produce(conn, <messageStructure>, <exchangeName>, <queueKey>)
+err := rabbitmq.Produce(conn, <messageStructure>, <headers>, <exchangeName>, <key>)
 // messageStructure should be a structure pointer
 ````

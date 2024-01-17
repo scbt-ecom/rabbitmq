@@ -9,7 +9,7 @@ type Queue struct {
 	Key                 string
 	Exchange            string
 	XDeadLetterExchange string
-	XMessageTTL         int //milliseconds
+	XMessageTTL         int // milliseconds
 }
 
 func InitQueue(conn *amqp.Connection, queue Queue) error {
