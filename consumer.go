@@ -7,12 +7,13 @@ import (
 func Consume(conn *amqp.Connection, queueName, consumerName string) (<-chan amqp.Delivery, error) {
 	ch, err := conn.Channel()
 	if err != nil {
+		ch.Close()
 		return nil, err
 	}
-	defer ch.Close()
 
 	msgs, err := ch.Consume(queueName, consumerName, false, false, false, false, nil)
 	if err != nil {
+		ch.Close()
 		return nil, err
 	}
 
