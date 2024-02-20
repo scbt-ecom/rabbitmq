@@ -33,7 +33,7 @@ exampleExchange := rabbitmq.Exchange{
         Type: cfg.ExchangeType,
     }
     
-err := rabbitmq.InitExchange(conn, exampleExchange)
+err := rabbitmq.InitExchanges(conn, exampleExchange)
 ````
 
 ### Example of queue consuming
