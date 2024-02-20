@@ -43,6 +43,6 @@ msgs, err := rabbitmq.Consume(conn, <queueName>, <consumerName>)
 
 ### Example of queue producing
 ````
-err := rabbitmq.Produce(conn, <messageStructure>, <headers>, <exchangeName>, <key>)
+err := rabbitmq.ProduceWithContext(ctx, ch, <messageStructure>, <headers>, <exchangeName>, <key>)
 // messageStructure should be a structure pointer
 ````
