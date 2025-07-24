@@ -3,20 +3,14 @@ package rabbitmq
 import (
 	"context"
 	"encoding/json"
-	"errors"
+	
 	amqp "github.com/rabbitmq/amqp091-go"
-	"reflect"
 )
 
 type Headers amqp.Table
 
-// ProduceWithContext message should be structure pointer
+// ProduceWithContext message should be json serialized
 func ProduceWithContext(ctx context.Context, ch *amqp.Channel, message any, headers Headers, exchange, key string) error {
-	v := reflect.ValueOf(message)
-	if v.Kind() != reflect.Ptr || v.Elem().Kind() != reflect.Struct {
-		return errors.New("message not a structure pointer")
-	}
-
 	body, err := json.Marshal(message)
 	if err != nil {
 		return err
