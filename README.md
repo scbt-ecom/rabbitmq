@@ -2,12 +2,12 @@
 
 ## Getting started
 ```bash
-go get github.com/skbt-ecom/rabbitmq@v1.3.3
+go get github.com/skbt-ecom/rabbitmq@v1.4.0
 ```
 
 ## Development
 
-### Create connection with RabbitMQ || Enable life supporting on connection/channels
+### Create connection with RabbitMQ and enable life supporting on connection/channels
 ```
 pub := rabbitmq.NewPublisher("amqp://guest:guest@localhost:5672/", "dispatcher", "controller")
 
