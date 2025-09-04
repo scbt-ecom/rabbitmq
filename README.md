@@ -2,7 +2,7 @@
 
 ## Getting started
 ```bash
-go get github.com/skbt-ecom/rabbitmq@v1.4.0
+go get github.com/scbt-ecom/rabbitmq@v1.4.0
 ```
 
 ## Development
