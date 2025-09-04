@@ -7,10 +7,19 @@ go get github.com/skbt-ecom/rabbitmq
 
 ## Development
 
-### Create connection with RabbitMQ
+### Create connection with RabbitMQ || Enable life supporting on connection/channels
 ```
-conn, err := rabbitmq.CreateConnection(<rabbitMqUrl>)
-// url example - amqp://<username>:<password>@<host>:<port>
+pub := rabbitmq.NewPublisher("amqp://guest:guest@localhost:5672/", "dispatcher", "controller")
+
+go pub.StartLifeSupport(10 * time.Second)
+
+for {
+	time.Sleep(10 * time.Millisecond)
+	err := rabbitmq.ProduceWithContext(context.Background(), pub.GetChannel("controller"), map[string]interface{}{"sad": "l;ol"}, rabbitmq.Headers{}, "amq.direct", "test")
+	if err != nil {
+		fmt.Println(err.Error())
+	}
+}
 ```
 ### Example of queue initialization
 
@@ -43,6 +52,6 @@ msgs, err := rabbitmq.Consume(conn, <queueName>, <consumerName>)
 
 ### Example of queue producing
 ````
-err := rabbitmq.ProduceWithContext(ctx, ch, <messageStructure>, <headers>, <exchangeName>, <key>)
+err := rabbitmq.ProduceWithContext(ctx, pub.GetChannel("dispatcher"), <messageStructure>, <headers>, <exchangeName>, <key>)
 // messageStructure should be a structure pointer
 ````
